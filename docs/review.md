@@ -34,7 +34,11 @@ The state updates and data accesses differ despite similar equality-test counts.
 These facts explain why equality-test counts are an incomplete cost model. They
 do not identify a processor-level cause for the measured time difference.
 
-The follow-up's `source_dirty: true` records untracked generated main-study
+The original superseded follow-up's `source_dirty: true` records untracked generated main-study
 summaries and figures at launch. Its algorithm, driver and follow-up source are
 unchanged from recorded revision `170e0cf`. This is an honest repository-state
 qualification, not evidence of an uncommitted algorithm variant.
+
+The verified replacement studies both started with clean working trees and use
+the identical recorded executable SHA-256. Their relevant source hashes are
+retained in each environment file; see `docs/measurement-correction.md`.

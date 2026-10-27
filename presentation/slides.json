@@ -88,7 +88,7 @@
     ],
     "notes": "The main study has three hundred and sixty-three validated instances. It varies text length, pattern length, alphabet, structure and match position. Each instance has nine timed batches, after warm-up and calibration. Both algorithms receive the same inputs, and the standard library checks actual first positions outside timing. The monotonic clock surrounds algorithm calls only. It excludes file loading, generation and printing. KMP builds and destroys its table on every call. Results are consumed, and optimized assembly confirmed repeated calls inside the batching loop. The plots summarise instance medians and show their interquartile spread. This separates repeated timing noise from differences between the three input instances.",
     "sources": [
-      "bench/driver.cpp; scripts/experiment.py; results/main-2026-10-27/environment.json"
+      "bench/driver.cpp; scripts/experiment.py; results/main-verified-2026-10-27/environment.json"
     ]
   },
   {
@@ -96,10 +96,10 @@
     "title": "Long partial matches reward KMP",
     "lines": [
       "Repeated text, absent pattern, n = 65,536",
-      "At m = 512: 106.79 times faster",
+      "At m = 512: 104.48 times faster",
       "Complete calls, including preprocessing"
     ],
-    "notes": "This plot holds text length at sixty-five thousand five hundred and thirty-six and increases the length of an absent near-match pattern. The naive curve rises because each candidate repeats a longer prefix. KMP remains close to a linear scan of the text. At pattern length five hundred and twelve, naive takes about eleven point two milliseconds while KMP takes about one hundred and five microseconds. That is approximately one hundred and seven times faster. The spread is small relative to this gap. This is an intentionally difficult input for naive search. On random alphabet-twenty-six text, the algorithms are much closer, with naive slightly faster in the measured large absent case. The prose windows also give overlapping spreads. The result supports a conditional choice, rather than declaring a universal winner.",
+    "notes": "This plot holds text length at sixty-five thousand five hundred and thirty-six and increases the length of an absent near-match pattern. The naive curve rises because each candidate repeats a longer prefix. KMP remains close to a linear scan of the text. At pattern length five hundred and twelve, naive takes about eleven point one milliseconds while KMP takes about one hundred and four microseconds. That is approximately one hundred and four times faster. The spread is small relative to this gap. This is an intentionally difficult input for naive search. On random alphabet-twenty-six text, the algorithms are much closer, with naive slightly faster in the measured large absent case. The prose windows also give overlapping spreads. The result supports a conditional choice, rather than declaring a universal winner.",
     "sources": [
       "results/summary.csv; results/tables.md; report figures 1-2"
     ]
@@ -110,9 +110,9 @@
     "lines": [
       "Naive: 33,292,800 equality tests",
       "KMP: 131,582, including preprocessing",
-      "Count ratio 253.02; runtime ratio 106.79"
+      "Count ratio 253.02; runtime ratio 104.48"
     ],
-    "notes": "The counters test the explanation about repeated work. On that repeated absent input, naive makes roughly thirty-three million comparisons. The exact formula is n minus m plus one, multiplied by m. KMP makes about one hundred and thirty-two thousand, including preprocessing. The analysis script checks those counts against independently derived formulas. This confirms that KMP removes repeated equality tests. But the comparison ratio is about two hundred and fifty-three, while the runtime ratio is only about one hundred and seven. Equality tests are not equally expensive complete steps. The code also updates indices, follows fallbacks and accesses the table. This difference motivated a separate experiment, with its own prediction recorded after the main study.",
+    "notes": "The counters test the explanation about repeated work. On that repeated absent input, naive makes roughly thirty-three million comparisons. The exact formula is n minus m plus one, multiplied by m. KMP makes about one hundred and thirty-two thousand, including preprocessing. The analysis script checks those counts against independently derived formulas. This confirms that KMP removes repeated equality tests. But the comparison ratio is about two hundred and fifty-three, while the runtime ratio is only about one hundred and four. Equality tests are not equally expensive complete steps. The code also updates indices, follows fallbacks and accesses the table. This difference motivated a separate experiment, with its own prediction recorded after the main study.",
     "sources": [
       "results/facts.json; scripts/analyse.py; docs/followup-prediction.md"
     ]
@@ -125,7 +125,7 @@
       "Pattern: ab followed by 510 a bytes",
       "Both absent searches, m = 512"
     ],
-    "notes": "The follow-up moves one mismatching b through an otherwise all-a pattern. At index one, naive and KMP make almost equal numbers of equality tests. The new prediction was that their runtimes would be similar. Instead, naive takes about sixty-one microseconds and KMP about one hundred and eight. KMP is one point seven seven times slower, and the observed spreads are well separated. The exact counts are one hundred and thirty thousand and fifty for naive, and one hundred and thirty-two thousand and ninety-one for KMP. The difference is only about one point six percent. Looking at the source explains the limitation of the count: naive rejects each candidate on its second comparison, while KMP repeatedly fails at pattern index one, falls back to zero and compares the same text byte again. Those paths perform different surrounding work. This does not identify a cache or branch-prediction cause. It establishes that comparison count alone is an insufficient timing model, while still being a useful measure of the repeated work removed.",
+    "notes": "The follow-up moves one mismatching b through an otherwise all-a pattern. At index one, naive and KMP make almost equal numbers of equality tests. The new prediction was that their runtimes would be similar. Instead, naive takes about sixty-two microseconds and KMP about one hundred and eight. KMP is one point seven four times slower, and the observed spreads are well separated. The exact counts are one hundred and thirty thousand and fifty for naive, and one hundred and thirty-two thousand and ninety-one for KMP. The difference is only about one point six percent. Looking at the source explains the limitation of the count: naive rejects each candidate on its second comparison, while KMP repeatedly fails at pattern index one, falls back to zero and compares the same text byte again. Those paths perform different surrounding work. This does not identify a cache or branch-prediction cause. It establishes that comparison count alone is an insufficient timing model, while still being a useful measure of the repeated work removed.",
     "sources": [
       "results/mismatch-summary.csv; docs/review.md; report section 5"
     ]
