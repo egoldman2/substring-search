@@ -20,17 +20,24 @@
 - The report and slide values are generated from the selected replacement data.
   The report is approximately 5,000 words. The script has 1,449 spoken words and
   estimates 10:23 at 145 words/minute with transitions; rehearsal is still required.
-- Report pages and slide renders were inspected for readability, indices, clipping
-  and consistent data. The PowerPoint contains native editable text, tables,
+- All 13 public report pages, the private disclosure pages and all 12 slide renders were inspected for readability, indices, clipping
+  and consistent data. The exact final PowerPoint was reimported and all 12 renders matched the inspected source previews byte for byte. It contains native editable text, tables,
   byte-cell diagrams and a chart with its literal data workbook.
 
 ## Final checkout and Linux
 
-A fresh local clone and the README commands are being checked before final handoff.
-The local Docker daemon is unavailable. A Linux GitHub Actions workflow compiles,
-tests, runs a bounded smoke study and regenerates the figures, report and slide PDF.
-Its actual outcome will be recorded here rather than inferred from portable code.
-Performance data are from macOS only, even if Linux correctness/build checks pass.
+A fresh clone of published revision `0443603` passed the README build, tests,
+sanitizers, NDEBUG check, both file-search examples (each printed `2`), and the
+six-instance benchmark smoke run. Its optional document environment was created
+from scratch with the pinned requirements. Nineteen regenerated summary, source
+and figure files were byte-identical to the committed versions. Both regenerated
+PDFs had identical extracted text; PDF timestamps are expected to differ.
+
+[Linux CI run 40488385491](https://github.com/egoldman2/substring-search/actions/runs/40488385491)
+passed on that same revision: compilation, tests, sanitizers, all generator/CLI
+checks, smoke collection and complete figure/report/slide-PDF regeneration. The
+local Docker daemon was unavailable, so Linux verification used GitHub Actions.
+Performance data are from macOS only; Linux CI verifies correctness and portability.
 The PowerPoint package is retained as editable source; the portable script rebuilds
 its content, layout and PDF, not that package. Native PowerPoint playback has not
 been tested. No independent human adversarial reviewer is claimed.

@@ -1,8 +1,8 @@
 # Naive substring search and KMP
 
 A reproducible C++17 comparison for Advanced Algorithms 41052, Programming
-Assignment 2. Ethan Goldman is the individual submitter and primary owner of both
-algorithm modules. Both search immutable byte sequences and return the **first**
+Assignment 2. Ethan Goldman is the individual submitter and primary author
+responsible for both algorithm modules. Both search immutable byte sequences and return the **first**
 matching byte index, `std::string_view::npos` if absent, and zero for an empty pattern.
 Embedded zero bytes are valid. The public technical report is part of a larger
 submission package; personal submission sections are maintained separately.

@@ -20,7 +20,7 @@ def resolve(text, facts):
 def render(text, output, title):
     styles = getSampleStyleSheet()
     styles.add(ParagraphStyle('Body', fontName='Times-Roman', fontSize=10.5, leading=14.1,
-        spaceAfter=8, splitLongWords=True))
+        spaceAfter=8, splitLongWords=True, allowWidows=0, allowOrphans=0))
     styles.add(ParagraphStyle('ReportTitle',fontName='Helvetica-Bold',fontSize=23,leading=28,spaceAfter=16))
     styles.add(ParagraphStyle('Section',fontName='Helvetica-Bold',fontSize=14,leading=18,spaceBefore=15,spaceAfter=9,keepWithNext=True))
     styles.add(ParagraphStyle('Subsection',fontName='Helvetica-Bold',fontSize=11.5,leading=15,spaceBefore=9,spaceAfter=7,keepWithNext=True))
@@ -43,7 +43,7 @@ def render(text, output, title):
             story.extend([Spacer(1,8),image,Spacer(1,6)])
         else:
             style='Body'
-            if block=='## References':
+            if block in ('## References', '## 4. Results and analysis', '### 4.2 Pattern length and repeated work'):
                 story.append(PageBreak())
             for prefix,name in [('### ','Subsection'),('## ','Section'),('# ','ReportTitle')]:
                 if block.startswith(prefix):

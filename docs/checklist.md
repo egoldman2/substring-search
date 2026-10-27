@@ -15,8 +15,8 @@ and primary owner of both algorithm modules under the approved scope.
 | Required disclosure | 10% | Private complete submission outside this repository | Private draft with four genuine examples prepared; personal review/finalisation pending |
 | Peer viewing | 5% | Private note-taking template and three real responses | Pending allocation and viewing; due one week after allocation |
 | Report quality | 5% | Editable public technical report and PDF, private submission version | Technical report and editable source prepared; private submission sections need human review |
-| Publication | - | Public GitHub repository and pushed commits | Public repository created and initial milestones pushed; final verification/push in progress |
-| Fresh checkout | - | README build/test/smoke/regeneration commands | Final committed-revision check in progress |
+| Publication | - | Public GitHub repository and pushed commits | Complete: public repository and project commits pushed |
+| Fresh checkout | - | README build/test/smoke/regeneration commands | Complete: fresh public clone and Linux CI passed; see docs/verification.md |
 
 The public technical report is only part of the submission. Personal reflection
 and mandatory submission-only sections must be supplied separately.
